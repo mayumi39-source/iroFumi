@@ -356,3 +356,6 @@
 
 ### 画面遷移図
 Figma：<https://www.figma.com/design/yJB4FzT290C7bIeftmjPnF/iroFumi%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=USCigDBLkLusKOMg-0>
+
+### ER図
+draw.io : <https://app.diagrams.net/#G1HIN7yNnRocSF8iDpC9ayYgNdOiDeo6Wa#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D>
