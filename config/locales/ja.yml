@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      color_entry:
+        date: "この日付"
+        color: "色"
+        memo: "ひとこと"
