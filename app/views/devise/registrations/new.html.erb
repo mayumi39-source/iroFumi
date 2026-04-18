@@ -12,8 +12,16 @@
 
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <%= f.label :password, "パスワード", style: "display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;" %>
-      <%= f.password_field :password, autocomplete: "new-password",
-          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
+      <div style="position: relative;">
+        <%= f.password_field :password, autocomplete: "new-password",
+            id: "password-field",
+            style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; padding-right: 3rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
+        <button type="button" onclick="togglePassword('password-field', 'toggle-btn-password')"
+                id="toggle-btn-password"
+                style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2rem;">
+          👁️
+        </button>
+      </div>
       <% if @minimum_password_length %>
         <p style="font-size: 1rem; color: #a8a29e; margin-top: 0.5rem;"><%= @minimum_password_length %>文字以上</p>
       <% end %>
@@ -21,14 +29,35 @@
 
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <%= f.label :password_confirmation, "パスワード（確認）", style: "display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password",
-          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
+      <div style="position: relative;">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password",
+            id: "password-confirmation-field",
+            style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; padding-right: 3rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
+        <button type="button" onclick="togglePassword('password-confirmation-field', 'toggle-btn-confirmation')"
+                id="toggle-btn-confirmation"
+                style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2rem;">
+          👁️
+        </button>
+      </div>
     </div>
 
     <div style="margin-top: 2rem;">
       <%= f.submit "登録する",
           style: "width: 100%; background-color: #0A2C50; color: white; font-size: 1.2rem; padding: 1rem; border-radius: 9999px; cursor: pointer; border: none;" %>
     </div>
+    <script>
+      function togglePassword(fieldId, btnId) {
+        var field = document.getElementById(fieldId);
+        var btn = document.getElementById(btnId);
+        if (field.type === 'password') {
+          field.type = 'text';
+          btn.textContent = '🙈';
+        } else {
+          field.type = 'password';
+          btn.textContent = '👁️';
+        }
+      }
+    </script>
   <% end %>
 
   <div style="margin-top: 1.5rem; font-size: 1.1rem; color: #0A2C50;">
