@@ -20,7 +20,9 @@
       <div style="display: flex; gap: 1rem; margin-left: auto;">
         <% if user_signed_in? %>
           <%= link_to "今日の色を記録", new_color_entry_path, style: "font-size: 1.2rem; color: #0A2C50; text-decoration: none;" %>
-          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, style: "font-size: 1.2rem; color: #0A2C50; text-decoration: none; opacity: 0.6;" %>
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete,
+            form: { style: "display: inline;" },
+            style: "font-size: 1.2rem; color: #0A2C50; text-decoration: none; opacity: 0.6; background: none; border: none; cursor: pointer; font-family: 'Zen Maru Gothic', sans-serif;" %>
         <% else %>
           <%= link_to "ログイン", new_user_session_path, style: "font-size: 1.2rem; color: #0A2C50; text-decoration: none;" %>
           <%= link_to "新規登録", new_user_registration_path, style: "font-size: 1.2rem; color: #0A2C50; text-decoration: none;" %>
