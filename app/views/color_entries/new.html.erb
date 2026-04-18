@@ -1,4 +1,20 @@
-<div>
-  <h1 class="font-bold text-4xl">ColorEntries#new</h1>
-  <p>Find me in app/views/color_entries/new.html.erb</p>
-</div>
+<h1 class="text-xl font-medium text-stone-700 mb-6">今日の色</h1>
+
+<%= form_with model: @color_entry, local: true do |f| %>
+  <div class="mb-6">
+    <label class="block text-sm text-stone-600 mb-2">色を選ぶ</label>
+    <%= f.color_field :color, value: @color_entry.color || "#a8b5a0",
+        class: "w-full h-24 rounded-2xl border-0 cursor-pointer" %>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-stone-600 mb-2">ひとこと（任意）</label>
+    <%= f.text_area :memo, rows: 3, placeholder: "今日の気持ちを少しだけ...",
+        class: "w-full rounded-xl border border-stone-200 p-3 text-sm text-stone-700 resize-none" %>
+  </div>
+
+  <%= f.hidden_field :date, value: Date.today %>
+
+  <%= f.submit "記録する",
+      class: "w-full bg-stone-700 text-white text-sm py-3 rounded-full cursor-pointer" %>
+<% end %>
