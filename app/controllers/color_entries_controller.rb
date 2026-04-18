@@ -15,7 +15,7 @@ class ColorEntriesController < ApplicationController
   def create
     @color_entry = current_user.color_entries.build(color_entry_params)
     if @color_entry.save
-      redirect_to root_path, notice: '記録しました'
+      redirect_to complete_color_entry_path
     else
       render :new
     end
@@ -40,6 +40,9 @@ class ColorEntriesController < ApplicationController
   def show
   end
 
+  def complete
+  end
+  
   private
 
   def set_color_entry
