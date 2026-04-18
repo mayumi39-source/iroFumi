@@ -1,4 +1,25 @@
-<div>
-  <h1 class="font-bold text-4xl">ColorEntries#edit</h1>
-  <p>Find me in app/views/color_entries/edit.html.erb</p>
+<div class="max-w-md mx-auto mt-8">
+  <div class="mb-6 flex items-center justify-between">
+    <h1 class="text-xl font-medium text-stone-700">記録を編集</h1>
+    <%= link_to "戻る", color_entry_path(@color_entry), class: "text-sm text-stone-400" %>
+  </div>
+
+  <%= form_with model: @color_entry, local: true do |f| %>
+    <div class="mb-6">
+      <label class="block text-sm text-stone-600 mb-2">色を選ぶ</label>
+      <%= f.color_field :color, value: @color_entry.color,
+          class: "w-full h-24 rounded-2xl border-0 cursor-pointer" %>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-sm text-stone-600 mb-2">ひとこと（任意）</label>
+      <%= f.text_area :memo, rows: 3, placeholder: "今日の気持ちを少しだけ...",
+          class: "w-full rounded-xl border border-stone-200 p-3 text-sm text-stone-700 resize-none" %>
+    </div>
+
+    <%= f.hidden_field :date, value: @color_entry.date %>
+
+    <%= f.submit "更新する",
+        class: "w-full bg-stone-700 text-white text-sm py-3 rounded-full cursor-pointer" %>
+  <% end %>
 </div>
