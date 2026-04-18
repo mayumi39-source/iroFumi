@@ -5,10 +5,19 @@
 <div class="grid grid-cols-7 gap-2 mb-8">
   <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |date| %>
     <% entry = @color_entries.find { |e| e.date == date } %>
-    <div class="aspect-square rounded-full flex items-center justify-center text-xs text-stone-400"
-         style="background-color: <%= entry ? entry.color : '#f5f5f4' %>;">
-      <%= date.day %>
-    </div>
+    <% if entry %>
+      <%= link_to color_entry_path(entry) do %>
+        <div class="aspect-square rounded-full flex items-center justify-center text-xs text-white"
+             style="background-color: <%= entry.color %>;">
+          <%= date.day %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="aspect-square rounded-full flex items-center justify-center text-xs text-stone-400"
+           style="background-color: #f5f5f4;">
+        <%= date.day %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
