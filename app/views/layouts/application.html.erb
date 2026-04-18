@@ -26,11 +26,10 @@
         <% end %>
       </div>
     </nav>
-    <% if notice %>
-      <p class="text-center text-sm text-green-600 mt-4"><%= notice %></p>
-    <% end %>
     <% if alert %>
-      <p class="text-center text-sm text-red-400 mt-4"><%= alert %></p>
+      <div style="max-width: 480px; margin: 1rem auto; padding: 1rem; background: rgba(255, 255, 255, 0.71); border: 2px solid #e17055; border-radius: 1rem; text-align: center;">
+        <p style="color: #e17055; font-size: 1.2rem;">⚠️ <%= alert %></p>
+      </div>
     <% end %>
     <main class="max-w-2xl mx-auto px-4 py-8">
       <%= yield %>
