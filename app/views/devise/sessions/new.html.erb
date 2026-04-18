@@ -5,8 +5,8 @@
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <%= f.label :email, "メールアドレス", style: "display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email",
-          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
-    </div>
+        inputmode: "email",
+        style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 1rem; font-size: 1.2rem; color: #44403c; box-sizing: border-box;" %>
 
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <%= f.label :password, "パスワード", style: "display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;" %>
