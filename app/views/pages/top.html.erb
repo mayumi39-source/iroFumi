@@ -8,13 +8,14 @@
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
   <style>
-    body {
+   body {
       margin: 0;
       min-height: 100vh;
       background-image: url('https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?w=1600');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      background-color: #000014;
     }
     .overlay {
       min-height: 100vh;
@@ -25,10 +26,20 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
+      position: relative;
+      z-index: 1;
     }
+    .app-bg { 
+      display: none !important; 
+      visibility: hidden !important;
+      opacity: 0 !important;
+      z-index: -9999 !important;
+    }
+    nav { display: none !important; }
+    footer { display: none !important; }
   </style>
 </head>
-<body>
+<body style="margin: 0; padding: 0;">
   <div class="overlay">
     <h1 style="color: white; font-size: 3.75rem; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 1rem;">
       iroFumi
