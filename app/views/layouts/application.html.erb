@@ -9,14 +9,15 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-stone-50 min-h-screen">
-    <nav class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-      <a href="/" class="text-lg font-medium text-stone-700">iroFumi</a>
+    <nav class="bg-white bg-opacity-10 px-6 py-4 flex justify-between items-center">
+      <a href="/" class="text-lg font-medium text-white">iroFumi</a>
       <div>
         <% if user_signed_in? %>
-          <%= link_to "今日の色を記録", new_color_entry_path, class: "text-sm text-stone-600 mr-4" %>
-          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-stone-400" %>
+          <%= link_to "今日の色を記録", new_color_entry_path, class: "text-sm text-white mr-4" %>
+          <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-sm text-white opacity-60" %>
         <% else %>
-          <%= link_to "ログイン", new_user_session_path, class: "text-sm text-stone-600" %>
+          <%= link_to "ログイン", new_user_session_path, class: "text-sm text-white mr-4" %>
+          <%= link_to "新規登録", new_user_registration_path, class: "text-sm text-white opacity-60" %>
         <% end %>
       </div>
     </nav>
