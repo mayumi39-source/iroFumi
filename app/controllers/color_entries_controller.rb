@@ -1,7 +1,7 @@
 class ColorEntriesController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_user!
-  before_action :set_color_entry, only: [:edit, :update, :destroy]
+  before_action :set_color_entry, only: [:show, :edit, :update, :destroy]
 
   def index
     @color_entries = current_user.color_entries.order(date: :desc)
@@ -35,6 +35,9 @@ class ColorEntriesController < ApplicationController
   def destroy
     @color_entry.destroy
     redirect_to root_path, notice: '削除しました'
+  end
+
+  def show
   end
 
   private
