@@ -8,24 +8,166 @@
           style: "width: 100%; border-radius: 0.75rem; border: 1px solid #0A2C50; padding: 0.75rem; font-size: 1.25rem; color: #44403c;" %>
     </div>
 
-    <div style="margin-bottom: 1.5rem; text-align: center;">
-      <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">色を選ぶ</label>
-      <div style="position: relative; width: 10rem; height: 10rem; margin: 0 auto;">
-        <div id="color-preview" style="width: 10rem; height: 10rem; border-radius: 50%; background: radial-gradient(circle at center, #0008ff 20%, #0008ff99 50%, #0008ff33 75%, transparent 100%), #ffffff; margin: 0 auto;"></div>
-        <%= f.color_field :color, value: @color_entry.color || "#0008ff",
-            id: "color-picker",
-            style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border-radius: 50%;" %>
-      </div>
+<div style="margin-bottom: 1.5rem; text-align: center;">
+    <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">色を選ぶ</label>
+
+    <%# プレビュー円 %>
+    <div style="position: relative; width: 10rem; height: 10rem; margin: 0 auto 1.5rem;">
+      <div id="color-preview" style="width: 10rem; height: 10rem; border-radius: 50%; background: radial-gradient(circle at center, #0008ff 20%, #0008ff99 50%, #0008ff33 75%, transparent 100%), #ffffff;"></div>
+      <%= f.color_field :color, value: @color_entry.color || "#0008ff",
+          id: "color-picker",
+          style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border-radius: 50%;" %>
     </div>
 
-<script>
-  const picker = document.getElementById('color-picker');
-  const preview = document.getElementById('color-preview');
-  picker.addEventListener('input', function() {
-    const color = this.value;
-    preview.style.background = `radial-gradient(circle at center, ${color} 30%, ${color}99 55%, ${color}33 70%, transparent 100%), #ffffff`;
-  });
-</script>
+    <%# 色を選ぶボタン %>
+    <div id="step-1" onmouseenter="showStep2()">
+      <button type="button"
+              style="padding: 0.75rem 2rem; border-radius: 9999px; border: 2px solid #0A2C50; background-color: #0A2C50; color: white; font-size: 1.1rem; cursor: pointer;">
+        🎨 色を選ぶ
+      </button>
+    </div>
+
+    <%# 選択方法ボタン %>
+    <div id="step-2" style="display: none;">
+      <p style="font-size: 1rem; color: #0A2C50; margin-bottom: 1rem;">選び方を選んでください</p>
+      <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+        <button type="button" onclick="showMode('picker')" id="btn-picker"
+                style="display: flex; flex-direction: column; align-items: center; padding: 0.75rem 1.25rem; border-radius: 1rem; border: 2px solid #0A2C50; background-color: transparent; color: #0A2C50; font-size: 0.9rem; cursor: pointer; gap: 0.3rem;">
+          <span style="font-size: 1.5rem;">💉</span>
+          <span>ピッカー</span>
+        </button>
+        <button type="button" onclick="showMode('palette')" id="btn-palette"
+                style="display: flex; flex-direction: column; align-items: center; padding: 0.75rem 1.25rem; border-radius: 1rem; border: 2px solid #0A2C50; background-color: transparent; color: #0A2C50; font-size: 0.9rem; cursor: pointer; gap: 0.3rem;">
+          <span style="font-size: 1.5rem;">🎨</span>
+          <span>パレット</span>
+        </button>
+        <button type="button" onclick="showMode('slider')" id="btn-slider"
+                style="display: flex; flex-direction: column; align-items: center; padding: 0.75rem 1.25rem; border-radius: 1rem; border: 2px solid #0A2C50; background-color: transparent; color: #0A2C50; font-size: 0.9rem; cursor: pointer; gap: 0.3rem;">
+          <span style="font-size: 1.5rem;">🖌️</span>
+          <span>スライダー</span>
+        </button>
+      </div>
+
+      <%# カラーピッカーモード %>
+      <div id="mode-picker" style="display: none; margin-bottom: 1rem; text-align: center;">
+        <button type="button" onclick="document.getElementById('color-picker').click()"
+                style="padding: 0.75rem 2rem; border-radius: 9999px; border: 2px solid #0A2C50; background-color: transparent; color: #0A2C50; font-size: 1rem; cursor: pointer;">
+          🎨 ピッカーを開く
+        </button>
+      </div>
+
+      <%# パレットモード %>
+      <div id="mode-palette" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;">
+       <% [
+            "#FF6B6B", "#FF8E53", "#FFC75F",
+            "#A8E6CF", "#4ECDC4", "#45B7D1",
+            "#6C5CE7", "#FD79A8", "#E17055",
+            "#0A2C50", "#636E72", "#B2BEC3"
+          ].each do |color| %>
+          <div onclick="selectColor('<%= color %>')"
+              style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background-color: <%= color %>; cursor: pointer; border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          </div>
+        <% end %>
+      </div>
+
+      <%# スライダーモード %>
+      <div id="mode-slider" style="display: none; text-align: left; padding: 0 1rem;">
+        <div style="margin-bottom: 0.75rem;">
+          <label style="font-size: 1rem; color: #e17055;">R</label>
+          <input type="range" id="slider-r" min="0" max="255" value="0"
+                style="width: 100%; accent-color: #e17055;">
+        </div>
+        <div style="margin-bottom: 0.75rem;">
+          <label style="font-size: 1rem; color: #00b894;">G</label>
+          <input type="range" id="slider-g" min="0" max="255" value="0"
+                style="width: 100%; accent-color: #00b894;">
+        </div>
+        <div style="margin-bottom: 0.75rem;">
+          <label style="font-size: 1rem; color: #0984e3;">B</label>
+          <input type="range" id="slider-b" min="0" max="255" value="255"
+                style="width: 100%; accent-color: #0984e3;">
+        </div>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <button type="button" onclick="hideStep2()"
+                style="font-size: 0.9rem; color: #0A2C50; background: none; border: none; cursor: pointer; opacity: 0.6;">
+          閉じる
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      const colorPickerInput = document.getElementById('color-picker');
+      const colorPreview = document.getElementById('color-preview');
+      const sliderR = document.getElementById('slider-r');
+      const sliderG = document.getElementById('slider-g');
+      const sliderB = document.getElementById('slider-b');
+
+      function showStep2() {
+        document.getElementById('step-1').style.display = 'none';
+        document.getElementById('step-2').style.display = 'block';
+      }
+
+      function hideStep2() {
+        document.getElementById('step-2').style.display = 'none';
+        document.getElementById('step-1').style.display = 'block';
+        ['picker', 'palette', 'slider'].forEach(m => {
+          document.getElementById('mode-' + m).style.display = 'none';
+        });
+      }
+
+      function showMode(mode) {
+        ['picker', 'palette', 'slider'].forEach(m => {
+          const el = document.getElementById('mode-' + m);
+          el.style.display = m === mode ? (m === 'palette' ? 'flex' : 'block') : 'none';
+          const btn = document.getElementById('btn-' + m);
+          btn.style.backgroundColor = m === mode ? '#0A2C50' : 'transparent';
+          btn.style.color = m === mode ? 'white' : '#0A2C50';
+        });
+        if (mode === 'picker') {
+          colorPickerInput.click();
+        }
+      }
+
+      function updatePreview(hex) {
+        colorPreview.style.background = `radial-gradient(circle at center, ${hex} 20%, ${hex}99 50%, ${hex}33 75%, transparent 100%), #ffffff`;
+        colorPickerInput.value = hex;
+      }
+
+      function hexToRgb(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return { r, g, b };
+      }
+
+      function rgbToHex(r, g, b) {
+        return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+      }
+
+      function selectColor(hex) {
+        const { r, g, b } = hexToRgb(hex);
+        sliderR.value = r;
+        sliderG.value = g;
+        sliderB.value = b;
+        updatePreview(hex);
+      }
+
+      function updateFromSliders() {
+        const hex = rgbToHex(parseInt(sliderR.value), parseInt(sliderG.value), parseInt(sliderB.value));
+        updatePreview(hex);
+      }
+
+      colorPickerInput.addEventListener('input', function() {
+        selectColor(this.value);
+      });
+
+      sliderR.addEventListener('input', updateFromSliders);
+      sliderG.addEventListener('input', updateFromSliders);
+      sliderB.addEventListener('input', updateFromSliders);
+    </script>
 
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">ひとこと（任意）</label>

@@ -1,16 +1,22 @@
-<div class="max-w-md mx-auto mt-8 text-center">
-  <div class="mb-8">
-    <p class="text-4xl mb-4">🎨</p>
-    <h1 class="text-xl font-medium text-stone-700 mb-2">記録しました</h1>
-    <p class="text-sm text-stone-400">今日の色が残りました。おつかれさまでした。</p>
+<div style="max-width: 480px; margin: 0 auto; text-align: center;">
+  <div style="margin-bottom: 3rem;">
+      <p style="font-size: 1.5rem; color: #0A2C50; line-height: 2; margin-bottom: 1rem;">
+      <br>
+      <br>
+      <br>
+      今日の色、うけとりました。<br>
+      <br>
+      あなたの今日を、<br>
+      ここに踏みしめておきますね。
+    </p>
   </div>
 
   <%= link_to "カレンダーを見る", home_path,
-      class: "inline-block bg-stone-700 text-white text-sm px-6 py-3 rounded-full" %>
+      style: "display: inline-block; background-color: #0A2C50; color: white; font-size: 1.2rem; padding: 0.75rem 2rem; border-radius: 9999px; text-decoration: none;" %>
 </div>
 
 <script>
   setTimeout(function() {
     window.location.href = "<%= home_path %>";
-  }, 5000);
+  }, 7000);
 </script>
