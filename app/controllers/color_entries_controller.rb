@@ -9,7 +9,7 @@ class ColorEntriesController < ApplicationController
   end
 
   def new
-    @color_entry = current_user.color_entries.build(date: Date.today)
+    @color_entry = current_user.color_entries.build(date: params[:date] || Date.today)
   end
 
   def create
@@ -42,7 +42,7 @@ class ColorEntriesController < ApplicationController
 
   def complete
   end
-  
+
   private
 
   def set_color_entry

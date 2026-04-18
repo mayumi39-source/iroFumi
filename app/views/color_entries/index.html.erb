@@ -1,27 +1,50 @@
-<h1 class="text-xl font-medium text-stone-700 mb-6">
-  <%= Date.today.strftime("%Y年%m月") %>の記録
-</h1>
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+  <h1 style="font-size: 2rem; color: #0A2C50; margin-bottom: 1.5rem; text-align: center;">
+    <%= Date.today.strftime("%Y年%m月") %>
+  </h1>
 
-<div class="grid grid-cols-7 gap-2 mb-8">
-  <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |date| %>
-    <% entry = @color_entries.find { |e| e.date == date } %>
-    <% if entry %>
-      <%= link_to color_entry_path(entry) do %>
-        <div class="aspect-square rounded-full flex items-center justify-center text-xs text-white"
-             style="background-color: <%= entry.color %>;">
-          <%= date.day %>
+  <div style="text-align: center; margin-bottom: 3rem; margin-top: 3rem;">
+    <%= link_to "今日の色を記録する", new_color_entry_path,
+        style: "display: inline-block; background-color: #0A2C50; color: white; font-size: 1.2rem; padding: 0.75rem 1.5rem; border-radius: 9999px; text-decoration: none;" %>
+  </div>
+
+  <div style="margin-bottom: 2rem;">
+    <%# 曜日ヘッダー %>
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 4px;">
+      <% %w[日 月 火 水 木 金 土].each do |day| %>
+        <div style="text-align: center; font-size: 1.2rem; color: #0A2C50; padding: 4px;">
+          <%= day %>
         </div>
       <% end %>
-    <% else %>
-      <div class="aspect-square rounded-full flex items-center justify-center text-xs text-stone-400"
-           style="background-color: #f5f5f4;">
-        <%= date.day %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+    </div>
 
-<div class="text-center">
-  <%= link_to "今日の色を記録する", new_color_entry_path,
-      class: "inline-block bg-stone-700 text-white text-sm px-6 py-3 rounded-full" %>
+    <%# カレンダー本体 %>
+    <div style="display: grid; grid-template-columns: repeat(7, 1fr); border-left: 1px solid #f0ede8; border-top: 1px solid #f0ede8;">
+      <%# 月初の空白 %>
+      <% first_day = Date.today.beginning_of_month.wday %>
+      <% first_day.times do %>
+        <div style="border-right: 1px solid #f0ede8; border-bottom: 1px solid #f0ede8; aspect-ratio: 1; background-color: #fafafa;"></div>
+      <% end %>
+
+      <%# 日付セル %>
+      <% (Date.today.beginning_of_month..Date.today.end_of_month).each do |date| %>
+        <% entry = @color_entries.find { |e| e.date == date } %>
+        <% bg_color = entry ? entry.color : "#ffffff" %>
+
+        <% if entry %>
+          <%= link_to color_entry_path(entry), style: "display: block; position: relative; border-right: 1px solid rgba(240,237,232,0.6); border-bottom: 1px solid rgba(240,237,232,0.6); aspect-ratio: 1; background: radial-gradient(circle at center, #{bg_color} 20%, #{bg_color}99 50%, #{bg_color}33 75%, transparent 100%), #ffffff; text-decoration: none;" do %>
+            <span style="position: absolute; top: 4px; left: 4px; font-size: 1.1rem; color: #0A2C50;">
+              <%= date.day %>
+            </span>
+          <% end %>
+        <% else %>
+          <%= link_to new_color_entry_path(date: date), style: "display: block; position: relative; border-right: 1px solid rgba(240,237,232,0.6); border-bottom: 1px solid rgba(240,237,232,0.6); aspect-ratio: 1; background-color: #ffffff; text-decoration: none;" do %>
+            <span style="position: absolute; top: 4px; left: 4px; font-size: 1.1rem; color: #0A2C50;">
+              <%= date.day %>
+            </span>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

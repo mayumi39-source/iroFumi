@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   root to: "pages#top"
   get "home", to: "color_entries#index", as: :home
   get "color_entries/complete", to: "color_entries#complete", as: :complete_color_entry
