@@ -1,5 +1,6 @@
 class ColorEntriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_color_entry, only: [:edit, :update, :destroy]
 
   def index
