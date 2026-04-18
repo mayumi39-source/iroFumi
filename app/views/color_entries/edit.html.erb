@@ -1,25 +1,44 @@
-<div class="max-w-md mx-auto mt-8">
-  <div class="mb-6 flex items-center justify-between">
-    <h1 class="text-xl font-medium text-stone-700">記録を編集</h1>
-    <%= link_to "戻る", color_entry_path(@color_entry), class: "text-sm text-stone-400" %>
-  </div>
+<div style="max-width: 480px; margin: 0 auto; text-align: center;">
+  <h1 style="font-size: 2rem; color: #0A2C50; margin-bottom: 2rem;">記録を編集</h1>
 
   <%= form_with model: @color_entry, local: true do |f| %>
-    <div class="mb-6">
-      <label class="block text-sm text-stone-600 mb-2">色を選ぶ</label>
-      <%= f.color_field :color, value: @color_entry.color,
-          class: "w-full h-24 rounded-2xl border-0 cursor-pointer" %>
+    <div style="margin-bottom: 1.5rem; text-align: left;">
+      <label style="display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;">日付</label>
+      <%= f.date_field :date, value: @color_entry.date,
+          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #0A2C50; padding: 0.75rem; font-size: 1.25rem; color: #44403c;" %>
     </div>
 
-    <div class="mb-6">
-      <label class="block text-sm text-stone-600 mb-2">ひとこと（任意）</label>
+    <div style="margin-bottom: 1.5rem; text-align: center;">
+      <label style="display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;">色を選ぶ</label>
+      <div style="position: relative; width: 10rem; height: 10rem; margin: 0 auto;">
+        <div id="color-preview" style="width: 10rem; height: 10rem; border-radius: 50%; background: radial-gradient(circle at center, <%= @color_entry.color %> 20%, <%= @color_entry.color %>99 50%, <%= @color_entry.color %>33 75%, transparent 100%), #ffffff; margin: 0 auto;"></div>
+        <%= f.color_field :color, value: @color_entry.color,
+            id: "color-picker",
+            style: "position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border-radius: 50%;" %>
+      </div>
+    </div>
+
+    <script>
+      const picker = document.getElementById('color-picker');
+      const preview = document.getElementById('color-preview');
+      picker.addEventListener('input', function() {
+        const color = this.value;
+        preview.style.background = `radial-gradient(circle at center, ${color} 20%, ${color}99 50%, ${color}33 75%, transparent 100%), #ffffff`;
+      });
+    </script>
+
+    <div style="margin-bottom: 1.5rem; text-align: left;">
+      <label style="display: block; font-size: 1.2rem; color: #0A2C50; margin-bottom: 0.5rem;">ひとこと（任意）</label>
       <%= f.text_area :memo, rows: 3, placeholder: "今日の気持ちを少しだけ...",
-          class: "w-full rounded-xl border border-stone-200 p-3 text-sm text-stone-700 resize-none" %>
+          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 0.75rem; font-size: 1.05rem; color: #44403c; resize: none;" %>
     </div>
-
-    <%= f.hidden_field :date, value: @color_entry.date %>
 
     <%= f.submit "更新する",
-        class: "w-full bg-stone-700 text-white text-sm py-3 rounded-full cursor-pointer" %>
+        style: "width: 100%; background-color: #0A2C50; color: white; font-size: 1.2rem; padding: 1rem; border-radius: 9999px; cursor: pointer; border: none;" %>
   <% end %>
+
+  <div style="margin-top: 1.5rem;">
+    <%= link_to "戻る", color_entry_path(@color_entry),
+        style: "font-size: 1.1rem; color: #0A2C50; text-decoration: none; opacity: 0.7;" %>
+  </div>
 </div>
