@@ -17,7 +17,7 @@ class ColorEntriesController < ApplicationController
     if @color_entry.save
       redirect_to complete_color_entry_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

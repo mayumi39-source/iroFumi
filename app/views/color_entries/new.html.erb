@@ -2,6 +2,13 @@
   <h1 style="font-size: 2.8rem; color: #ffffff; margin-bottom: 2rem;">今日の色</h1>
 
   <%= form_with model: @color_entry, local: true do |f| %>
+  <% if @color_entry.errors.any? %>
+    <div style="background: rgba(255,255,255,0.8); border-radius: 1rem; padding: 1rem; margin-bottom: 1.5rem; text-align: left;">
+      <% @color_entry.errors.full_messages.each do |message| %>
+        <p style="color: #e17055; font-size: 1.3rem;">※ <%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
     <div style="margin-bottom: 1.5rem; text-align: left;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">日付</label>
       <%= f.date_field :date, value: @color_entry.date,
