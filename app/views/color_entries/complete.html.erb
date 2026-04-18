@@ -1,0 +1,16 @@
+<div class="max-w-md mx-auto mt-8 text-center">
+  <div class="mb-8">
+    <p class="text-4xl mb-4">🎨</p>
+    <h1 class="text-xl font-medium text-stone-700 mb-2">記録しました</h1>
+    <p class="text-sm text-stone-400">今日の色が残りました。おつかれさまでした。</p>
+  </div>
+
+  <%= link_to "カレンダーを見る", home_path,
+      class: "inline-block bg-stone-700 text-white text-sm px-6 py-3 rounded-full" %>
+</div>
+
+<script>
+  setTimeout(function() {
+    window.location.href = "<%= home_path %>";
+  }, 3000);
+</script>
