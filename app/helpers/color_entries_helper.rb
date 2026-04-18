@@ -1,0 +1,2 @@
+module ColorEntriesHelper
+end
