@@ -9,10 +9,10 @@
       <% end %>
     </div>
   <% end %>
-    <div style="margin-bottom: 1.5rem; text-align: center;">
+    <div style="margin-bottom: 1.5rem; text-align: center; width: 100%; box-sizing: border-box;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">日付</label>
       <%= f.date_field :date, value: @color_entry.date,
-          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #0A2C50; padding: 0.75rem; font-size: 1.25rem; color: #44403c;" %>
+          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #0A2C50; padding: 0.75rem; font-size: 1.25rem; color: #44403c; box-sizing: border-box;" %>
     </div>
 
 <div style="margin-bottom: 1.5rem; text-align: center;">
@@ -177,10 +177,10 @@
       sliderB.addEventListener('input', updateFromSliders);
     </script>
 
-    <div style="margin-bottom: 1.5rem; text-align: center;">
+    <div style="margin-bottom: 1.5rem; text-align: center; width: 100%; box-sizing: border-box;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">ひとこと（任意）</label>
       <%= f.text_area :memo, rows: 3, placeholder: "今日の気持ちを少しだけ...",
-          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 0.75rem; font-size: 1.05rem; color: #44403c; resize: none;" %>
+          style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 0.75rem; font-size: 1.05rem; color: #44403c; resize: none; box-sizing: border-box;" %>
     </div>
 
     <%= f.submit "記録する",
