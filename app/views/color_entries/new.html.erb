@@ -1,4 +1,4 @@
-<div style="max-width: 480px; width: 100%; margin: 0 auto; text-align: center; padding: 0 1rem; box-sizing: border-box;">
+<div style="max-width: 380px; width: 100%; margin: 0 auto; text-align: center; padding: 0 1.5rem; box-sizing: border-box;">
   <h1 style="font-size: 2.8rem; color: #ffffff; margin-bottom: 2rem;">今日の色</h1>
 
   <%= form_with model: @color_entry, local: true do |f| %>
@@ -9,7 +9,7 @@
       <% end %>
     </div>
   <% end %>
-    <div style="margin-bottom: 1.5rem; text-align: left;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">日付</label>
       <%= f.date_field :date, value: @color_entry.date,
           style: "width: 100%; border-radius: 0.75rem; border: 1px solid #0A2C50; padding: 0.75rem; font-size: 1.25rem; color: #44403c;" %>
@@ -177,7 +177,7 @@
       sliderB.addEventListener('input', updateFromSliders);
     </script>
 
-    <div style="margin-bottom: 1.5rem; text-align: left;">
+    <div style="margin-bottom: 1.5rem; text-align: center;">
       <label style="display: block; font-size: 1.55rem; color: #0A2C50; margin-bottom: 0.5rem;">ひとこと（任意）</label>
       <%= f.text_area :memo, rows: 3, placeholder: "今日の気持ちを少しだけ...",
           style: "width: 100%; border-radius: 0.75rem; border: 1px solid #d4cfc9; padding: 0.75rem; font-size: 1.05rem; color: #44403c; resize: none;" %>
