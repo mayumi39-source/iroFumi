@@ -42,10 +42,10 @@
           <%= alert %>
         </p>
       </div>
-      <% if notice %>
+      <% if notice || params[:notice] %>
         <div style="max-width: 480px; margin: 1rem auto; padding: 1rem; background: rgba(255, 255, 255, 0.71); border: 2px solid #0A2C50; border-radius: 1rem; text-align: center;">
           <p style="color: #0A2C50; font-size: 1.2rem;">
-            <%= notice %>
+            <%= notice || params[:notice] %>
           </p>
         </div>
       <% end %>
